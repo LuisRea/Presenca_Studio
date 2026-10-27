@@ -307,7 +307,8 @@
           <p class="text-xs uppercase tracking-eyebrow text-marca" data-campo="servicos.sobretitulo"></p>
           <h2 class="mt-6 font-serif text-4xl leading-[1.08] sm:text-5xl" data-campo="servicos.titulo"></h2>
           <p class="mt-6 leading-relaxed text-claro/65" data-campo="servicos.subtitulo"></p>
-          <div class="group isolate mt-12 hidden aspect-[4/5] overflow-hidden rounded-2xl lg:block">
+          <!-- Visible en todas las medidas: 4:3 en móvil/tablet, 4:5 vertical desde lg -->
+          <div class="group isolate mt-12 aspect-[4/3] overflow-hidden rounded-2xl lg:aspect-[4/5]">
             <img data-img="servicos" alt="" width="1200" height="1500" loading="lazy"
                  class="h-full w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105" onerror="this.remove()">
           </div>
