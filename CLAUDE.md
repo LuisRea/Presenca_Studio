@@ -32,6 +32,13 @@ scripts/                 ← utilidades (copiar plantilla, validar, publicar)
 4. **Datos centralizados por cliente**: todos los datos del negocio (nombre, textos, teléfono, WhatsApp, dirección, servicios, testimonios, colores, imágenes) viven en el objeto `CLIENTE` al inicio del `index.html`. Nunca hardcodear datos del cliente dentro del markup de los bloques.
 5. **Idioma**: todo texto visible para el cliente final va en **portugués de Brasil** (`<html lang="pt-BR">`). Comentarios de código e instrucciones internas pueden ir en español.
 6. **Sin chatbots externos**: prohibido incluir widgets o scripts de chatbots de terceros (Tidio, Crisp, Intercom, ManyChat, Zendesk, etc.). El contacto es únicamente vía enlace `https://wa.me/<número>` con mensaje prellenado.
+7. **Seguridad (sitio estático en Cloudflare Pages)**:
+   - En el `<head>`: `<meta http-equiv="X-Content-Type-Options" content="nosniff">` y `<meta name="referrer" content="strict-origin-when-cross-origin">`.
+   - Todo enlace con `target="_blank"` lleva `rel="noopener noreferrer"`.
+   - Las URLs de imágenes, vídeos y redes que vienen de `CLIENTE` se validan en el RENDER (`urlSegura`): solo `https://` o rutas relativas limpias; cualquier otra cosa se descarta.
+   - Cada sitio de cliente incluye el archivo `_headers` (copia de `templates/_headers`) con `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy` y `Permissions-Policy`. `nuevo-cliente.ps1` lo copia automáticamente; no borrarlo.
+8. **Redes sociales en el footer**: la barra inferior del bloque 6 muestra el teléfono y botones circulares con icono SVG de Instagram y Facebook (`CLIENTE.instagram`, `CLIENTE.facebook`: usuario o URL `https://`; vacío = oculto).
+9. **Botones**: todos los CTA (Header, Hero, Footer, móvil) son cápsulas `rounded-full`, nunca esquinas rectas. Contenedores de imagen y mapa con `rounded-2xl`. En móvil el header siempre muestra un botón compacto "Agendar" hacia WhatsApp.
 
 ## Flujo para un nuevo cliente
 

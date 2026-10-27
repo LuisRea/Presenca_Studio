@@ -44,6 +44,13 @@ Get-ChildItem -Path $plantilla -Force |
   Where-Object { $_.Name -ne ".gitkeep" } |
   Copy-Item -Destination $destino -Recurse -Force
 
+# Cabeceras de seguridad para Cloudflare Pages (comunes a todos los nichos)
+$headers = Join-Path $raiz "templates\_headers"
+if (-not (Test-Path $headers)) {
+  Write-Error "Falta templates\_headers (cabeceras de seguridad)."
+}
+Copy-Item -Path $headers -Destination $destino -Force
+
 $index = Join-Path $destino "index.html"
 Write-Host ""
 Write-Host "Cliente creado: clientes\$Slug  (plantilla: $Nicho)" -ForegroundColor Green

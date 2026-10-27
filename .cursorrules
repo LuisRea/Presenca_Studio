@@ -26,6 +26,21 @@ Proyecto: landing pages para negocios locales en Brasil, generadas desde plantil
 - Texto visible al usuario final: portugués de Brasil (lang="pt-BR").
 - Comentarios e instrucciones internas: español.
 
+## Seguridad (estático + Cloudflare Pages)
+- <head> con <meta http-equiv="X-Content-Type-Options" content="nosniff"> y
+  <meta name="referrer" content="strict-origin-when-cross-origin">.
+- Todo target="_blank" lleva rel="noopener noreferrer".
+- URLs de imágenes/vídeos/redes desde CLIENTE: validar con urlSegura (solo https:// o rutas relativas limpias).
+- Cada sitio de cliente incluye _headers (copia de templates/_headers): X-Frame-Options, X-Content-Type-Options,
+  Referrer-Policy y Permissions-Policy. scripts/nuevo-cliente.ps1 lo copia automáticamente.
+
+## Footer y botones
+- Barra inferior del footer: teléfono + botones circulares SVG de Instagram y Facebook
+  (CLIENTE.instagram / CLIENTE.facebook: usuario o URL https://; vacío = oculto).
+- Todos los CTA (Header, Hero, Footer) son cápsulas rounded-full; nunca botones cuadrados.
+- Contenedores de imagen y mapa con rounded-2xl.
+- En móvil, el header siempre muestra un botón compacto "Agendar" (data-whatsapp, md:hidden).
+
 ## Prohibido
 - Widgets o scripts de chatbots externos (Tidio, Crisp, Intercom, ManyChat, Zendesk, etc.).
 - El único canal de contacto es el enlace https://wa.me/<número>?text=<mensaje>.
