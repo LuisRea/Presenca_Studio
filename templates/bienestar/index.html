@@ -162,6 +162,12 @@
     }
   </script>
   <style>
+    /* Control de desbordamiento horizontal en móvil */
+    html, body { overflow-x: clip; }                         /* clip y no hidden: hidden rompe position:sticky */
+    .flex > *, .inline-flex > *, .grid > * { min-width: 0; } /* los hijos de flex/grid pueden encogerse con su texto */
+    img, iframe, video { max-width: 100%; height: auto; }    /* las clases h-* de Tailwind siguen mandando donde existen */
+    h1, h2, h3, [data-campo="localizacao.endereco"] { overflow-wrap: anywhere; }
+
     /* Aparición suave al hacer scroll (sin librerías) */
     .revelar { opacity: 0; transform: translateY(24px); transition: opacity 1.1s ease, transform 1.1s ease; }
     .revelar.visivel { opacity: 1; transform: none; }
@@ -183,7 +189,7 @@
   </style>
 </head>
 
-<body class="w-full overflow-x-hidden bg-claro font-sans font-light text-escuro antialiased selection:bg-marca selection:text-white">
+<body class="w-full bg-claro font-sans font-light text-escuro antialiased selection:bg-marca selection:text-white">
 
   <!-- Header fijo: al pasar de 60px de scroll se vuelve cristal translúcido (ver RENDER) -->
   <!-- Móvil/tablet: barra a ancho completo con degradado escuro → transparente que se funde con el hero.
