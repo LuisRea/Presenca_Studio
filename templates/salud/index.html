@@ -179,15 +179,16 @@
   </style>
 </head>
 
-<body class="bg-claro font-sans font-light text-escuro antialiased selection:bg-marca selection:text-white">
+<body class="overflow-x-clip bg-claro font-sans font-light text-escuro antialiased selection:bg-marca selection:text-white">
 
   <!-- Header fijo: al pasar de 60px de scroll se vuelve cristal translúcido (ver RENDER) -->
   <!-- Móvil/tablet: barra a ancho completo con degradado escuro → transparente que se funde con el hero.
        Desde xl (1280px; con nombres largos el menú no cabe antes): barra de escritorio. -->
   <header data-header class="fixed inset-x-0 top-0 z-40 bg-gradient-to-b from-escuro/90 via-escuro/55 to-transparent transition-all duration-300 ease-out xl:bg-none">
     <div class="px-6 pb-5 pt-4 lg:px-10 xl:mx-auto xl:max-w-7xl xl:py-0">
-    <div data-header-barra class="flex items-center justify-between gap-8 transition-all duration-300 ease-out xl:py-7">
-      <a href="#inicio" class="shrink-0 whitespace-nowrap font-serif text-xl tracking-wide text-white md:text-2xl" data-campo="nome"></a>
+    <div data-header-barra class="flex items-center justify-between gap-4 transition-all duration-300 ease-out xl:gap-8 xl:py-7">
+      <!-- Móvil: el nombre puede ocupar dos líneas para no empujar los botones fuera de la pantalla -->
+      <a href="#inicio" class="min-w-0 font-serif text-xl leading-tight tracking-wide text-white md:text-2xl xl:shrink-0 xl:whitespace-nowrap" data-campo="nome"></a>
       <nav class="hidden items-center gap-10 whitespace-nowrap text-[13px] uppercase tracking-[0.2em] text-white/80 xl:flex">
         <a href="#sobre" class="transition-colors duration-300 hover:text-white" data-campo="menu.sobre"></a>
         <a href="#servicos" class="transition-colors duration-300 hover:text-white" data-campo="menu.servicos"></a>
@@ -197,7 +198,7 @@
         <a data-whatsapp class="rounded-full border border-white/40 px-6 py-2.5 text-white shadow-lg shadow-black/15 ring-1 ring-white/25 transition-all duration-300 hover:-translate-y-0.5 hover:border-marca hover:bg-marca hover:shadow-xl" data-campo="menu.agendar"></a>
       </nav>
       <!-- Móvil: CTA compacto siempre visible + botón hamburguesa -->
-      <div class="flex items-center gap-2 xl:hidden">
+      <div class="flex shrink-0 items-center gap-2 xl:hidden">
         <a data-whatsapp class="rounded-full border border-white/25 bg-white/15 px-4 py-2 text-xs uppercase tracking-widest text-white backdrop-blur-sm transition-all duration-300 hover:bg-marca" data-campo="menu.agendar"></a>
         <button type="button" data-menu-abrir aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir menu"
                 class="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white backdrop-blur-sm transition-colors duration-300 hover:bg-marca">
@@ -244,7 +245,7 @@
   <!-- ===== BLOQUE 1: HERO ===== -->
   <section id="inicio" data-fondo="hero" class="relative flex min-h-[100svh] flex-col overflow-hidden bg-gradient-to-br from-marca to-escuro">
     <img data-img="hero" alt="" width="2400" height="1600" fetchpriority="high"
-         class="absolute inset-0 h-full w-full object-cover" onerror="this.remove()">
+         class="absolute inset-0 h-full w-full object-cover">
     <video data-video-hero autoplay loop muted playsinline preload="auto" aria-hidden="true"
            class="absolute inset-0 hidden h-full w-full object-cover"></video>
     <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/30"></div>
@@ -271,7 +272,7 @@
       <figure class="revelar lg:col-span-5">
         <div data-fondo="ambiente" class="group isolate aspect-[3/4] overflow-hidden rounded-2xl bg-gradient-to-br from-marca/40 to-escuro/40">
           <img data-img="ambiente" alt="" width="1200" height="1600" loading="lazy"
-               class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" onerror="this.remove()">
+               class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
         </div>
       </figure>
 
@@ -311,7 +312,7 @@
           <!-- Visible en todas las medidas: 4:3 en móvil/tablet, 4:5 vertical desde lg -->
           <div class="group isolate mt-12 aspect-[4/3] overflow-hidden rounded-2xl lg:aspect-[4/5]">
             <img data-img="servicos" alt="" width="1200" height="1500" loading="lazy"
-                 class="h-full w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105" onerror="this.remove()">
+                 class="h-full w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105">
           </div>
         </div>
       </div>
@@ -388,7 +389,7 @@
   <!-- ===== BLOQUE 6: FOOTER / CTA WHATSAPP ===== -->
   <footer id="contato" data-fondo="cta" class="relative overflow-hidden bg-escuro text-claro">
     <img data-img="cta" alt="" width="2400" height="1600" loading="lazy"
-         class="absolute inset-0 h-full w-full object-cover" onerror="this.remove()">
+         class="absolute inset-0 h-full w-full object-cover">
     <div class="absolute inset-0 bg-escuro/75"></div>
 
     <div class="relative mx-auto max-w-3xl px-6 py-32 text-center sm:py-44">
@@ -510,10 +511,15 @@
         el.style.backgroundPosition = "center";
       });
 
-      // Imágenes
+      // Imágenes: si la foto local no existe, se carga la de respaldo en la propia <img>
+      // (así el zoom del hover y el lazy loading funcionan igual); si tampoco hay respaldo, se elimina
       document.querySelectorAll("[data-img]").forEach((img) => {
         const src = urlSegura(C.imagens[img.dataset.img]);
-        if (src) { img.src = src; img.alt = C.nome; } else { img.remove(); }
+        const respaldo = urlSegura((C.imagens.respaldo || {})[img.dataset.img]);
+        img.addEventListener("error", () => {
+          if (respaldo && !img.dataset.respaldo) { img.dataset.respaldo = "1"; img.src = respaldo; } else { img.remove(); }
+        });
+        if (src || respaldo) { img.src = src || respaldo; img.alt = C.nome; } else { img.remove(); }
       });
 
       // Video del Hero (la imagen "hero" queda debajo como fallback y como poster)
