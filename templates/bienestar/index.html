@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR" class="scroll-smooth scroll-pt-20">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,13 +25,16 @@
       // Contacto. WhatsApp: solo dígitos con código de país (55 + DDD + número).
       whatsapp: "5562999999999",
       mensagemWhatsapp: "Olá! Conheci o Santuário Raiz pelo site e gostaria de agendar uma terapia.",
+      mensagemServico: "Olá! Gostaria de agendar a terapia:",   // se completa con el nombre del servicio pulsado
       telefone: "(62) 99999-9999",
       instagram: "santuarioraiz",   // sin @; dejar "" para ocultar
 
       // Imágenes (URL o ruta relativa). Las de Unsplash son de muestra: sustituir por fotos reales del cliente.
       // "ambiente" se muestra en formato vertical 3:4 en el bloque de Beneficios.
+      // "videoHero" (MP4, opcional): fondo del Hero; si está vacío, falla o el usuario pide menos movimiento / ahorro de datos, se usa "hero".
       imagens: {
-        hero:     "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=2400&q=80",
+        videoHero: "https://assets.mixkit.co/videos/2213/2213-720.mp4",
+        hero:"https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=2400&q=80",
         ambiente: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&h=1600&q=80",
         servicos: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&h=1500&q=80",
         cta:      "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=2400&q=80"
@@ -137,7 +140,7 @@
   </script>
   <style>
     /* Aparición suave al hacer scroll (sin librerías) */
-    .revelar { opacity: 0; transform: translateY(24px); transition: opacity 1.1s ease, transform 1.1s ease; }
+    .revelar { opacity: 0; transform: translateY(24px); transition: opacity 1.1s ease, transform 1.1s ease, background-color .5s ease, color .5s ease; }
     .revelar.visivel { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) { .revelar { opacity: 1; transform: none; transition: none; } }
   </style>
@@ -145,30 +148,33 @@
 
 <body class="bg-claro font-sans font-light text-escuro antialiased selection:bg-marca selection:text-white">
 
+  <!-- Header fijo: al pasar de 60px de scroll se vuelve cristal translúcido (ver RENDER) -->
+  <header data-header class="fixed inset-x-0 top-0 z-40 transition-all duration-300 ease-out">
+    <div data-header-barra class="mx-auto flex max-w-7xl items-center justify-between px-6 py-7 transition-all duration-300 ease-out lg:px-10">
+      <a href="#inicio" class="font-serif text-2xl tracking-wide text-white" data-campo="nome"></a>
+      <nav class="hidden items-center gap-10 text-[13px] uppercase tracking-[0.2em] text-white/80 md:flex">
+        <a href="#santuario" class="transition-colors duration-300 hover:text-white">Santuário</a>
+        <a href="#terapias" class="transition-colors duration-300 hover:text-white">Terapias</a>
+        <a href="#localizacao" class="transition-colors duration-300 hover:text-white">Localização</a>
+        <a data-whatsapp class="border-b border-white/50 pb-1 text-white transition-colors duration-300 hover:border-white">Agendar</a>
+      </nav>
+    </div>
+  </header>
+
   <!-- ===== BLOQUE 1: HERO ===== -->
   <section id="inicio" class="relative flex min-h-[100svh] items-end overflow-hidden bg-gradient-to-br from-marca to-escuro">
     <img data-img="hero" alt="" width="2400" height="1600" fetchpriority="high"
          class="absolute inset-0 h-full w-full object-cover" onerror="this.remove()">
+    <video data-video-hero autoplay loop muted playsinline preload="auto" aria-hidden="true"
+           class="absolute inset-0 hidden h-full w-full object-cover"></video>
     <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/30"></div>
-
-    <header class="absolute inset-x-0 top-0 z-10">
-      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-7 lg:px-10">
-        <a href="#inicio" class="font-serif text-2xl tracking-wide text-white" data-campo="nome"></a>
-        <nav class="hidden items-center gap-10 text-[13px] uppercase tracking-[0.2em] text-white/80 md:flex">
-          <a href="#santuario" class="transition hover:text-white">Santuário</a>
-          <a href="#terapias" class="transition hover:text-white">Terapias</a>
-          <a href="#localizacao" class="transition hover:text-white">Localização</a>
-          <a data-whatsapp class="border-b border-white/50 pb-1 text-white transition hover:border-white">Agendar</a>
-        </nav>
-      </div>
-    </header>
 
     <div class="relative mx-auto w-full max-w-7xl px-6 pb-20 pt-40 lg:px-10 lg:pb-28">
       <p class="mb-6 text-xs uppercase tracking-eyebrow text-white/75" data-campo="slogan"></p>
       <h1 class="max-w-4xl font-serif text-5xl font-normal leading-[1.02] text-white sm:text-7xl lg:text-8xl" data-campo="hero.titulo"></h1>
       <div class="mt-10 flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
         <p class="max-w-md text-lg leading-relaxed text-white/80" data-campo="hero.subtitulo"></p>
-        <a data-whatsapp class="group inline-flex items-center gap-4 self-start bg-claro px-8 py-4 text-[13px] font-normal uppercase tracking-[0.2em] text-escuro transition hover:bg-white sm:self-auto">
+        <a data-whatsapp class="group inline-flex items-center gap-4 self-start bg-claro px-8 py-4 text-[13px] font-normal uppercase tracking-[0.2em] text-escuro transition-colors duration-500 ease-out hover:bg-marca hover:text-white sm:self-auto">
           <span data-campo="hero.botao"></span>
           <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span>
         </a>
@@ -180,24 +186,29 @@
   <section id="santuario" class="py-24 sm:py-32 lg:py-40">
     <div class="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-12 lg:gap-0 lg:px-10">
       <figure class="revelar lg:col-span-5">
-        <div class="aspect-[3/4] overflow-hidden bg-gradient-to-br from-marca/40 to-escuro/40">
+        <div class="group aspect-[3/4] overflow-hidden bg-gradient-to-br from-marca/40 to-escuro/40">
           <img data-img="ambiente" alt="" width="1200" height="1600" loading="lazy"
-               class="h-full w-full object-cover" onerror="this.remove()">
+               class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" onerror="this.remove()">
         </div>
       </figure>
 
-      <div class="revelar lg:col-span-6 lg:col-start-7 lg:pt-24">
-        <p class="text-xs uppercase tracking-eyebrow text-marca" data-campo="beneficios.sobretitulo"></p>
-        <h2 class="mt-6 font-serif text-4xl leading-[1.08] sm:text-5xl lg:text-6xl" data-campo="beneficios.titulo"></h2>
-        <p class="mt-8 max-w-lg text-lg leading-relaxed text-escuro/70" data-campo="beneficios.intro"></p>
+      <div class="lg:col-span-6 lg:col-start-7 lg:pt-24">
+        <div class="revelar">
+          <p class="text-xs uppercase tracking-eyebrow text-marca" data-campo="beneficios.sobretitulo"></p>
+          <h2 class="mt-6 font-serif text-4xl leading-[1.08] sm:text-5xl lg:text-6xl" data-campo="beneficios.titulo"></h2>
+          <p class="mt-8 max-w-lg text-lg leading-relaxed text-escuro/70" data-campo="beneficios.intro"></p>
+        </div>
 
-        <ol class="mt-14 border-t border-escuro/15" data-lista="beneficios">
+        <!-- .revelar va en el <li> y el hover en el hijo, para que sus transform no choquen -->
+        <ol class="mt-14" data-lista="beneficios">
           <template>
-            <li class="grid grid-cols-[3rem_1fr] gap-x-4 border-b border-escuro/15 py-7">
-              <span class="pt-1 font-serif text-lg italic text-marca" data-item="#"></span>
-              <div>
-                <h3 class="font-serif text-2xl" data-item="titulo"></h3>
-                <p class="mt-2 leading-relaxed text-escuro/65" data-item="texto"></p>
+            <li class="revelar">
+              <div class="grid grid-cols-[3rem_1fr] gap-x-4 border-b border-escuro/15 py-7 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-marca">
+                <span class="pt-1 font-serif text-lg italic text-marca" data-item="#"></span>
+                <div>
+                  <h3 class="font-serif text-2xl" data-item="titulo"></h3>
+                  <p class="mt-2 leading-relaxed text-escuro/65" data-item="texto"></p>
+                </div>
               </div>
             </li>
           </template>
@@ -214,25 +225,29 @@
           <p class="text-xs uppercase tracking-eyebrow text-marca" data-campo="servicos.sobretitulo"></p>
           <h2 class="mt-6 font-serif text-4xl leading-[1.08] sm:text-5xl" data-campo="servicos.titulo"></h2>
           <p class="mt-6 leading-relaxed text-claro/65" data-campo="servicos.subtitulo"></p>
-          <div class="mt-12 hidden aspect-[4/5] overflow-hidden lg:block">
+          <div class="group mt-12 hidden aspect-[4/5] overflow-hidden lg:block">
             <img data-img="servicos" alt="" width="1200" height="1500" loading="lazy"
-                 class="h-full w-full object-cover opacity-90" onerror="this.remove()">
+                 class="h-full w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105" onerror="this.remove()">
           </div>
         </div>
       </div>
 
-      <ol class="lg:col-span-7 lg:col-start-6" data-lista="servicos">
+      <!-- Cada fila abre WhatsApp con el nombre del servicio (data-wa-servico) -->
+      <ol class="border-b border-claro/15 lg:col-span-7 lg:col-start-6" data-lista="servicos">
         <template>
-          <li class="revelar grid grid-cols-[3rem_1fr] gap-x-4 border-t border-claro/15 py-9 last:border-b sm:grid-cols-[4rem_1fr_auto] sm:gap-x-8">
-            <span class="pt-1 font-serif text-lg italic text-marca" data-item="#"></span>
-            <div>
-              <h3 class="font-serif text-2xl sm:text-3xl" data-item="nome"></h3>
-              <p class="mt-3 max-w-md leading-relaxed text-claro/60" data-item="descricao"></p>
-            </div>
-            <div class="col-start-2 mt-4 flex gap-6 text-sm uppercase tracking-[0.15em] sm:col-start-3 sm:mt-1 sm:flex-col sm:items-end sm:gap-2">
-              <span class="text-claro/50" data-item="duracao"></span>
-              <span class="text-claro" data-item="preco"></span>
-            </div>
+          <li class="revelar">
+            <a data-wa-servico class="group grid grid-cols-[3rem_1fr] gap-x-4 border-t border-claro/15 py-9 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-marca sm:grid-cols-[4rem_1fr_auto] sm:gap-x-8">
+              <span class="pt-1 font-serif text-lg italic text-marca" data-item="#"></span>
+              <div>
+                <h3 class="font-serif text-2xl transition-colors duration-300 group-hover:text-white sm:text-3xl" data-item="nome"></h3>
+                <p class="mt-3 max-w-md leading-relaxed text-claro/60" data-item="descricao"></p>
+              </div>
+              <div class="col-start-2 mt-4 flex items-center gap-6 text-sm uppercase tracking-[0.15em] sm:col-start-3 sm:mt-1 sm:flex-col sm:items-end sm:gap-2">
+                <span class="text-claro/50" data-item="duracao"></span>
+                <span class="text-claro" data-item="preco"></span>
+                <span class="text-lg text-marca transition-transform duration-300 ease-out group-hover:translate-x-1.5 sm:mt-3" aria-hidden="true">→</span>
+              </div>
+            </a>
           </li>
         </template>
       </ol>
@@ -295,7 +310,7 @@
     <div class="relative mx-auto max-w-3xl px-6 py-32 text-center sm:py-44">
       <h2 class="revelar font-serif text-5xl leading-[1.05] sm:text-7xl" data-campo="cta.titulo"></h2>
       <p class="revelar mx-auto mt-8 max-w-lg text-lg leading-relaxed text-claro/75" data-campo="cta.texto"></p>
-      <a data-whatsapp class="revelar group mt-12 inline-flex items-center gap-4 bg-claro px-10 py-5 text-[13px] uppercase tracking-[0.2em] text-escuro transition hover:bg-white">
+      <a data-whatsapp class="revelar group mt-12 inline-flex items-center gap-4 bg-claro px-10 py-5 text-[13px] uppercase tracking-[0.2em] text-escuro hover:bg-marca hover:text-white">
         <span data-campo="cta.botao"></span>
         <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span>
       </a>
@@ -314,7 +329,8 @@
 
   <!-- Botón flotante de WhatsApp (enlace directo, NO es un chatbot) -->
   <a data-whatsapp aria-label="Conversar no WhatsApp"
-     class="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-escuro text-claro shadow-xl ring-1 ring-claro/20 transition hover:scale-105">
+     class="group fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-escuro text-claro shadow-xl ring-1 ring-claro/20 transition-all duration-300 ease-out hover:scale-110 hover:bg-marca">
+    <span class="absolute inset-0 -z-10 animate-ping rounded-full bg-marca/30 [animation-duration:2.8s] motion-reduce:animate-none" aria-hidden="true"></span>
     <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z"/>
     </svg>
@@ -327,7 +343,8 @@
     (function () {
       const C = CLIENTE;
       const get = (ruta) => ruta.split(".").reduce((o, k) => (o == null ? o : o[k]), C);
-      const waUrl = "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(C.mensagemWhatsapp);
+      const wa = (texto) => "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(texto);
+      const waUrl = wa(C.mensagemWhatsapp);
 
       // SEO
       document.title = C.seo.titulo;
@@ -352,6 +369,15 @@
             const valor = campo === "#" ? String(i + 1).padStart(2, "0") : campo ? item[campo] : item;
             if (valor) el.textContent = valor; else el.remove();
           });
+          // Aparición en cascada: +100ms por ítem
+          const rev = nodo.querySelector(".revelar");
+          if (rev) rev.style.transitionDelay = i * 100 + "ms";
+          const link = nodo.querySelector("[data-wa-servico]");
+          if (link) {
+            link.href = wa(C.mensagemServico + " " + item.nome);
+            link.target = "_blank";
+            link.rel = "noopener";
+          }
           cont.appendChild(nodo);
         });
       });
@@ -361,6 +387,33 @@
         const src = C.imagens[img.dataset.img];
         if (src) { img.src = src; img.alt = C.nome; } else { img.remove(); }
       });
+
+      // Video del Hero (la imagen "hero" queda debajo como fallback y como poster)
+      const video = document.querySelector("[data-video-hero]");
+      const pocoMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const ahorroDatos = navigator.connection && navigator.connection.saveData;
+      if (C.imagens.videoHero && !pocoMovimiento && !ahorroDatos) {
+        if (C.imagens.hero) video.poster = C.imagens.hero;
+        video.addEventListener("error", () => video.remove(), true);
+        video.src = C.imagens.videoHero;
+        video.classList.remove("hidden");
+      } else {
+        video.remove();
+      }
+
+      // Header: cristal translúcido al pasar de 60px
+      const header = document.querySelector("[data-header]");
+      const barra = document.querySelector("[data-header-barra]");
+      const actualizarHeader = () => {
+        const activo = scrollY > 60;
+        header.classList.toggle("backdrop-blur-md", activo);
+        header.classList.toggle("bg-escuro/85", activo);
+        header.classList.toggle("shadow-sm", activo);
+        barra.classList.toggle("py-4", activo);
+        barra.classList.toggle("py-7", !activo);
+      };
+      addEventListener("scroll", actualizarHeader, { passive: true });
+      actualizarHeader();
 
       // WhatsApp
       document.querySelectorAll("[data-whatsapp]").forEach((a) => {
