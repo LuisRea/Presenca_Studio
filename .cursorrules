@@ -1,0 +1,31 @@
+# Presença Studio — reglas para el asistente
+
+Proyecto: landing pages para negocios locales en Brasil, generadas desde plantillas por nicho
+(templates/bienestar, turismo, salud, tiendas) y personalizadas por cliente en /clientes/<slug>/.
+
+## Stack
+- HTML5 semántico + Tailwind CSS por CDN (https://cdn.tailwindcss.com).
+- Sin frameworks, sin build, sin npm. Un único index.html por sitio.
+
+## Rendimiento (carga rápida)
+- No añadir librerías JS de terceros.
+- Imágenes: loading="lazy" (salvo Hero), width/height explícitos, preferir WebP.
+- Máximo una familia de Google Fonts con preconnect y display=swap.
+- iframes de Google Maps con loading="lazy".
+
+## Estructura: 6 bloques modulares (orden fijo)
+1. Hero  2. Beneficios  3. Servicios  4. Testimonios  5. Ubicación  6. Footer / CTA WhatsApp
+- Cada bloque es una <section id="..."> independiente, marcada con
+  <!-- ===== BLOQUE N: NOMBRE ===== -->, que puede eliminarse o reordenarse sin romper el resto.
+
+## Datos centralizados por cliente
+- Todos los datos del negocio viven en el objeto CLIENTE al inicio de index.html.
+- Nunca escribir datos del cliente directamente en el markup de los bloques.
+
+## Idioma
+- Texto visible al usuario final: portugués de Brasil (lang="pt-BR").
+- Comentarios e instrucciones internas: español.
+
+## Prohibido
+- Widgets o scripts de chatbots externos (Tidio, Crisp, Intercom, ManyChat, Zendesk, etc.).
+- El único canal de contacto es el enlace https://wa.me/<número>?text=<mensaje>.
