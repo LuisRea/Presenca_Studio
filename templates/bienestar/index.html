@@ -154,9 +154,11 @@
 <body class="bg-claro font-sans font-light text-escuro antialiased selection:bg-marca selection:text-white">
 
   <!-- Header fijo: al pasar de 60px de scroll se vuelve cristal translúcido (ver RENDER) -->
+  <!-- En móvil la barra es una cápsula flotante de cristal; desde md vuelve a ser una barra a ancho completo -->
   <header data-header class="fixed inset-x-0 top-0 z-40 transition-all duration-300 ease-out">
-    <div data-header-barra class="mx-auto flex max-w-7xl items-center justify-between px-6 py-7 transition-all duration-300 ease-out lg:px-10">
-      <a href="#inicio" class="font-serif text-2xl tracking-wide text-white" data-campo="nome"></a>
+    <div class="mx-4 mt-3 rounded-full border border-white/15 bg-escuro/45 px-5 py-3 backdrop-blur-md md:mx-auto md:mt-0 md:max-w-7xl md:rounded-none md:border-0 md:bg-transparent md:px-6 md:py-0 md:backdrop-blur-none lg:px-10">
+    <div data-header-barra class="flex items-center justify-between transition-all duration-300 ease-out md:py-7">
+      <a href="#inicio" class="font-serif text-xl tracking-wide text-white md:text-2xl" data-campo="nome"></a>
       <nav class="hidden items-center gap-10 text-[13px] uppercase tracking-[0.2em] text-white/80 md:flex">
         <a href="#santuario" class="transition-colors duration-300 hover:text-white">Santuário</a>
         <a href="#terapias" class="transition-colors duration-300 hover:text-white">Terapias</a>
@@ -166,18 +168,30 @@
       <!-- CTA compacto siempre visible en móvil -->
       <a data-whatsapp class="rounded-full border border-white/25 bg-white/15 px-4 py-2 text-xs uppercase tracking-widest text-white backdrop-blur-sm transition-all duration-300 hover:bg-marca md:hidden">Agendar</a>
     </div>
+    </div>
+    <!-- Menú compacto móvil (se oculta al hacer scroll para no quedar sobre fondos claros) -->
+    <nav data-header-menu aria-label="Seções"
+         class="mt-3 flex items-center justify-center gap-3 text-[11px] uppercase tracking-[0.2em] text-white/85 transition-all duration-300 md:hidden">
+      <a href="#santuario" class="hover:text-white">Santuário</a>
+      <span class="text-white/40" aria-hidden="true">·</span>
+      <a href="#terapias" class="hover:text-white">Terapias</a>
+      <span class="text-white/40" aria-hidden="true">·</span>
+      <a href="#localizacao" class="hover:text-white">Localização</a>
+    </nav>
   </header>
 
   <!-- ===== BLOQUE 1: HERO ===== -->
-  <section id="inicio" class="relative flex min-h-[100svh] items-end overflow-hidden bg-gradient-to-br from-marca to-escuro">
+  <section id="inicio" class="relative flex min-h-[100svh] flex-col overflow-hidden bg-gradient-to-br from-marca to-escuro">
     <img data-img="hero" alt="" width="2400" height="1600" fetchpriority="high"
          class="absolute inset-0 h-full w-full object-cover" onerror="this.remove()">
     <video data-video-hero autoplay loop muted playsinline preload="auto" aria-hidden="true"
            class="absolute inset-0 hidden h-full w-full object-cover"></video>
     <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/30"></div>
 
-    <div class="relative mx-auto w-full max-w-7xl px-6 pb-20 pt-40 lg:px-10 lg:pb-28">
-      <p class="mb-6 text-xs uppercase tracking-eyebrow text-white/75" data-campo="slogan"></p>
+    <!-- Móvil: slogan arriba y contenido abajo (justify-between); desde md todo se agrupa abajo -->
+    <div class="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between px-6 pb-16 pt-36 md:justify-end md:pb-20 md:pt-40 lg:px-10 lg:pb-28">
+      <p class="text-xs uppercase tracking-eyebrow text-white/75 md:mb-6" data-campo="slogan"></p>
+      <div>
       <h1 class="max-w-4xl font-serif text-5xl font-normal leading-[1.02] text-white sm:text-7xl lg:text-8xl" data-campo="hero.titulo"></h1>
       <div class="mt-10 flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
         <p class="max-w-md text-lg leading-relaxed text-white/80" data-campo="hero.subtitulo"></p>
@@ -185,6 +199,7 @@
           <span data-campo="hero.botao"></span>
           <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span>
         </a>
+      </div>
       </div>
     </div>
   </section>
@@ -332,14 +347,14 @@
         <div class="flex items-center gap-4">
           <span class="mr-2" data-campo="telefone"></span>
           <a data-rede="instagram" aria-label="Instagram" target="_blank" rel="noopener noreferrer"
-             class="rounded-full border border-claro/20 p-2.5 text-claro/80 transition-all duration-300 hover:border-marca hover:bg-marca hover:text-white">
-            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+             class="rounded-full bg-claro p-3 text-escuro shadow-md ring-2 ring-marca/40 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-marca hover:text-white hover:shadow-lg hover:shadow-marca/40">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/>
             </svg>
           </a>
           <a data-rede="facebook" aria-label="Facebook" target="_blank" rel="noopener noreferrer"
-             class="rounded-full border border-claro/20 p-2.5 text-claro/80 transition-all duration-300 hover:border-marca hover:bg-marca hover:text-white">
-            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+             class="rounded-full bg-claro p-3 text-escuro shadow-md ring-2 ring-marca/40 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-marca hover:text-white hover:shadow-lg hover:shadow-marca/40">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V10H6.5v3.5H9V21h3.5v-7.5H15l.5-3.5h-3V7a1 1 0 0 1 1-1H15z"/>
             </svg>
           </a>
@@ -348,14 +363,18 @@
     </div>
   </footer>
 
-  <!-- Botón flotante de WhatsApp (enlace directo, NO es un chatbot) -->
-  <a data-whatsapp aria-label="Conversar no WhatsApp"
-     class="group fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-escuro text-claro shadow-xl ring-1 ring-claro/20 transition-all duration-300 ease-out hover:scale-110 hover:bg-marca">
-    <span class="absolute inset-0 -z-10 animate-ping rounded-full bg-marca/30 [animation-duration:2.8s] motion-reduce:animate-none" aria-hidden="true"></span>
-    <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z"/>
-    </svg>
-  </a>
+  <!-- Botón flotante de WhatsApp (enlace directo, NO es un chatbot).
+       Los halos van como hermanos detrás del botón para que el pulso no tiña el propio botón. -->
+  <div class="fixed bottom-28 right-5 z-50 sm:bottom-36 sm:right-8">
+    <span class="pointer-events-none absolute inset-0 animate-ping rounded-full bg-marca/50 [animation-duration:2.4s] motion-reduce:animate-none" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute inset-0 animate-ping rounded-full bg-marca/50 [animation-delay:1.2s] [animation-duration:2.4s] motion-reduce:animate-none" aria-hidden="true"></span>
+    <a data-whatsapp aria-label="Conversar no WhatsApp"
+       class="group relative flex h-14 w-14 items-center justify-center rounded-full bg-escuro text-claro shadow-[0_0_28px_rgb(var(--marca)/0.55)] ring-4 ring-marca/35 transition-all duration-300 ease-out hover:scale-110 hover:bg-marca hover:ring-marca/60 sm:h-16 sm:w-16">
+      <svg viewBox="0 0 24 24" class="h-6 w-6 sm:h-7 sm:w-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z"/>
+      </svg>
+    </a>
+  </div>
 
   <!-- =====================================================================
        RENDER — no editar. Vuelca los datos de CLIENTE en los bloques.
@@ -440,13 +459,18 @@
       // Header: cristal translúcido al pasar de 60px
       const header = document.querySelector("[data-header]");
       const barra = document.querySelector("[data-header-barra]");
+      const menuMovil = document.querySelector("[data-header-menu]");
       const actualizarHeader = () => {
         const activo = scrollY > 60;
-        header.classList.toggle("backdrop-blur-md", activo);
-        header.classList.toggle("bg-escuro/85", activo);
-        header.classList.toggle("shadow-sm", activo);
-        barra.classList.toggle("py-4", activo);
-        barra.classList.toggle("py-7", !activo);
+        // Desde md: barra completa de cristal. En móvil la cápsula ya es de cristal.
+        header.classList.toggle("md:backdrop-blur-md", activo);
+        header.classList.toggle("md:bg-escuro/85", activo);
+        header.classList.toggle("md:shadow-sm", activo);
+        barra.classList.toggle("md:py-4", activo);
+        barra.classList.toggle("md:py-7", !activo);
+        menuMovil.classList.toggle("opacity-0", activo);
+        menuMovil.classList.toggle("-translate-y-2", activo);
+        menuMovil.classList.toggle("pointer-events-none", activo);
       };
       addEventListener("scroll", actualizarHeader, { passive: true });
       actualizarHeader();
