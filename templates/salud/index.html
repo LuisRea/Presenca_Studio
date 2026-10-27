@@ -168,6 +168,11 @@
     .revelar.visivel { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) { .revelar { opacity: 1; transform: none; transition: none; } }
 
+    /* Halo de la esfera de WhatsApp: como animate-ping pero hasta 1.6x, para no sobresalir del viewport en móvil */
+    @keyframes halo { 75%, 100% { transform: scale(1.6); opacity: 0; } }
+    .halo { animation: halo 2.4s cubic-bezier(0, 0, 0.2, 1) infinite; }
+    @media (prefers-reduced-motion: reduce) { .halo { animation: none; } }
+
     /* Menú móvil: oculto por defecto; .abierto lo muestra con fundido */
     .menu-movil { opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s; }
     .menu-movil.abierto { opacity: 1; visibility: visible; transition: opacity .35s ease, visibility 0s; } /* visible al instante para poder enfocar la X */
@@ -429,8 +434,8 @@
   <!-- Botón flotante de WhatsApp (enlace directo, NO es un chatbot).
        Los halos van como hermanos detrás del botón para que el pulso no tiña el propio botón. -->
   <div data-wa-flotante class="pointer-events-none fixed bottom-[calc(40px+env(safe-area-inset-bottom))] right-5 z-50 translate-y-4 opacity-0 transition-all duration-500 motion-reduce:transition-none sm:right-8 md:bottom-28">
-    <span class="pointer-events-none absolute inset-0 animate-ping rounded-full bg-marca/50 [animation-duration:2.4s] motion-reduce:animate-none" aria-hidden="true"></span>
-    <span class="pointer-events-none absolute inset-0 animate-ping rounded-full bg-marca/50 [animation-delay:1.2s] [animation-duration:2.4s] motion-reduce:animate-none" aria-hidden="true"></span>
+    <span class="pointer-events-none halo absolute inset-0 rounded-full bg-marca/50" aria-hidden="true"></span>
+    <span class="pointer-events-none halo absolute inset-0 rounded-full bg-marca/50 [animation-delay:1.2s]" aria-hidden="true"></span>
     <a data-whatsapp aria-label="Conversar no WhatsApp"
        class="group relative flex h-14 w-14 items-center justify-center rounded-full bg-escuro text-claro shadow-[0_0_28px_rgb(var(--marca)/0.55)] ring-4 ring-marca/35 transition-all duration-300 ease-out hover:scale-110 hover:bg-marca hover:ring-marca/60 sm:h-16 sm:w-16">
       <svg viewBox="0 0 24 24" class="h-6 w-6 sm:h-7 sm:w-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
