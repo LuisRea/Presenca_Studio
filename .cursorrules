@@ -1,7 +1,8 @@
 # Presença Studio — reglas para el asistente
 
 Proyecto: landing pages para negocios locales en Brasil, generadas desde plantillas por nicho
-(templates/bienestar, turismo, salud, tiendas) y personalizadas por cliente en /clientes/<slug>/.
+(templates/bienestar = plantilla madre; turismo, salud, tiendas, servicios = variantes) y personalizadas
+por cliente en /clientes/<slug>/. Las variantes comparten markup y RENDER con la madre; solo cambia CLIENTE.
 
 ## Stack
 - HTML5 semántico + Tailwind CSS por CDN (https://cdn.tailwindcss.com).
@@ -17,10 +18,17 @@ Proyecto: landing pages para negocios locales en Brasil, generadas desde plantil
 1. Hero  2. Beneficios  3. Servicios  4. Testimonios  5. Ubicación  6. Footer / CTA WhatsApp
 - Cada bloque es una <section id="..."> independiente, marcada con
   <!-- ===== BLOQUE N: NOMBRE ===== -->, que puede eliminarse o reordenarse sin romper el resto.
+- ids genéricos en todos los nichos: #inicio #sobre #servicos #depoimentos #localizacao #contato.
 
 ## Datos centralizados por cliente
-- Todos los datos del negocio viven en el objeto CLIENTE al inicio de index.html.
+- Todos los datos del negocio viven en el objeto CLIENTE al inicio de index.html
+  (incluidas las etiquetas del menú CLIENTE.menu y el tipo schema.org CLIENTE.seo.schema).
 - Nunca escribir datos del cliente directamente en el markup de los bloques.
+- Open Graph: WhatsApp no ejecuta JS; <title>, description y og:* estáticos deben coincidir con CLIENTE.seo.
+
+## Nichos regulados
+- salud (CRM/CRO) y servicios jurídicos (OAB): precios vacíos y sin testimonios de clientes/casos
+  salvo revisión con el cliente de las normas de publicidad de su consejo.
 
 ## Idioma
 - Texto visible al usuario final: portugués de Brasil (lang="pt-BR").
@@ -39,7 +47,8 @@ Proyecto: landing pages para negocios locales en Brasil, generadas desde plantil
   (CLIENTE.instagram / CLIENTE.facebook: usuario o URL https://; vacío = oculto).
 - Todos los CTA (Header, Hero, Footer) son cápsulas rounded-full; nunca botones cuadrados.
 - Contenedores de imagen y mapa con rounded-2xl.
-- En móvil, el header siempre muestra un botón compacto "Agendar" (data-whatsapp, md:hidden).
+- Por debajo de xl (1280px): botón compacto "Agendar" + menú hamburguesa; desde xl, menú completo.
+- Esfera flotante de WhatsApp (data-wa-flotante): oculta sobre el Hero; móvil 40px + safe-area, escritorio md:bottom-28.
 
 ## Prohibido
 - Widgets o scripts de chatbots externos (Tidio, Crisp, Intercom, ManyChat, Zendesk, etc.).
