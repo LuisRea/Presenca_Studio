@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth scroll-pt-20">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Seguridad: nosniff solo es efectivo como cabecera HTTP (ver _headers); la meta queda como respaldo -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Cerne Tattoo | Tatuagem autoral em Alto Paraíso de Goiás</title>
+  <meta name="description" content="Fine line, blackwork e realismo em preto e cinza em Alto Paraíso de Goiás. Projetos autorais, biossegurança e agenda por sessão. Peça seu orçamento pelo WhatsApp.">
+  <!-- Open Graph (vista previa en WhatsApp/redes). Los crawlers de WhatsApp NO ejecutan JS:
+       estos valores estáticos deben copiarse a mano desde CLIENTE.seo al entregar (el RENDER los vuelve a rellenar). -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Cerne Tattoo | Tatuagem autoral em Alto Paraíso de Goiás">
+  <meta property="og:description" content="Fine line, blackwork e realismo em preto e cinza em Alto Paraíso de Goiás. Projetos autorais, biossegurança e agenda por sessão. Peça seu orçamento pelo WhatsApp.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?auto=format&amp;fit=crop&amp;w=2400&amp;q=80">
+
+  <!-- =====================================================================
+       DATOS DEL CLIENTE — editar SOLO este objeto para personalizar el sitio.
+       Todo texto visible debe ir en portugués de Brasil.
+       ===================================================================== -->
+  <script>
+    const CLIENTE = {
+      nome: "Cerne Tattoo",
+      slogan: "Estúdio de tatuagem autoral · Chapada dos Veadeiros",
+      seo: {
+        schema: "TattooParlor",   // tipo schema.org del negocio
+        titulo: "Cerne Tattoo | Tatuagem autoral em Alto Paraíso de Goiás",
+        descricao: "Fine line, blackwork e realismo em preto e cinza em Alto Paraíso de Goiás. Projetos autorais, biossegurança e agenda por sessão. Peça seu orçamento pelo WhatsApp."
+      },
+
+      // Colores de marca (hex). "marca" = acentos y botones; "escuro" = textos y fondos oscuros; "claro" = fondo base.
+      // Alternativa de acento mostaza: marca: "#B8892B"
+      cores: { marca: "#C0392B", escuro: "#141414", claro: "#ECEBE8" },
+
+      // Contacto. WhatsApp: solo dígitos con código de país (55 + DDD + número).
+      whatsapp: "5562999999999",
+      mensagemWhatsapp: "Olá! Conheci o Cerne Tattoo pelo site e gostaria de um orçamento para uma tatuagem.",
+      mensagemServico: "Olá! Quero orçar uma tatuagem no estilo:",   // se completa con el nombre del servicio pulsado
+      telefone: "(62) 99999-9999",
+      // Redes: usuario (sin @) o URL completa https://. Dejar "" para ocultar el botón.
+      // En este nicho el Instagram es el portafolio: conviene mencionarlo en los textos.
+      instagram: "cernetattoo",
+      facebook: "cernetattoo",
+
+      // Imágenes (URL https:// o ruta relativa; cualquier otra cosa se ignora por seguridad). Las de Unsplash son de muestra: sustituir por fotos reales del cliente.
+      // Fotos locales en assets/ (hero, ambiente, servicos, cta); mientras no existan se usa la de "respaldo" con la misma clave.
+      // "ambiente" se muestra en formato vertical 3:4 en el bloque de Beneficios: ideal una pieza grande del portafolio.
+      // "videoHero" (MP4, opcional): fondo del Hero; si está vacío, falla o el usuario pide menos movimiento / ahorro de datos, se usa "hero".
+      imagens: {
+        videoHero: "https://assets.mixkit.co/videos/397/397-720.mp4",
+        hero:     "assets/hero.jpg",
+        ambiente: "assets/ambiente.jpg",
+        servicos: "assets/servicos.jpg",
+        cta:      "assets/cta.jpg",
+        // Respaldo: se pinta como fondo del bloque; la foto local de arriba lo tapa cuando existe.
+        respaldo: {
+          hero:     "https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?auto=format&fit=crop&w=2400&q=80",
+          ambiente: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=1200&h=1600&q=80",
+          servicos: "https://images.unsplash.com/photo-1562962230-16e4623d36e6?auto=format&fit=crop&w=1200&h=1500&q=80",
+          cta:      "https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=2400&q=80"
+        }
+      },
+
+      // Menú (desktop y móvil) y botón "Agendar" del header
+      menu: { sobre: "Estúdio", servicos: "Estilos", depoimentos: "Clientes", localizacao: "Localização", contato: "Contato", agendar: "Agendar" },
+
+      // BLOQUE 1 — Hero
+      hero: {
+        titulo: "Arte que fica na pele",
+        subtitulo: "Projetos autorais em fine line, blackwork e realismo, desenhados do zero para contar a sua história.",
+        botao: "Pedir orçamento"
+      },
+
+      // BLOQUE 2 — Beneficios (recomendado: 3 o 4)
+      beneficios: {
+        sobretitulo: "O estúdio",
+        titulo: "Traço preciso, processo sem pressa",
+        intro: "Toda tatuagem começa com uma conversa. Ouvimos a ideia, estudamos o local do corpo e só então desenhamos — cada projeto é único.",
+        itens: [
+          { titulo: "Projeto exclusivo", texto: "Desenho criado para você e ajustado até ficar do seu jeito antes da sessão." },
+          { titulo: "Biossegurança total", texto: "Agulhas e materiais descartáveis, esterilização em autoclave e licença da Vigilância Sanitária." },
+          { titulo: "Portfólio à vista", texto: "Trabalhos recentes e já cicatrizados no nosso Instagram, para você conhecer o traço antes de decidir." },
+          { titulo: "Agenda por sessão", texto: "Um cliente por vez, com horário marcado e tempo para cada detalhe." }
+        ]
+      },
+
+      // BLOQUE 3 — Servicios ("preco" opcional; dejar "" para ocultar)
+      servicos: {
+        sobretitulo: "Estilos",
+        titulo: "Do traço fino ao preto sólido",
+        subtitulo: "Valores iniciais: o orçamento final depende do tamanho, do local e dos detalhes do projeto.",
+        itens: [
+          { nome: "Fine line", descricao: "Traços finos e delicados para florais, escritas e minimalismo.", duracao: "1–3 h", preco: "a partir de R$ 350" },
+          { nome: "Blackwork", descricao: "Preto sólido, geometria e ornamentos de alto contraste.", duracao: "2–5 h", preco: "a partir de R$ 600" },
+          { nome: "Realismo preto e cinza", descricao: "Retratos, animais e cenas com sombra suave e profundidade.", duracao: "4–6 h", preco: "a partir de R$ 900" },
+          { nome: "Lettering", descricao: "Nomes, datas e frases com tipografia desenhada à mão.", duracao: "1–2 h", preco: "a partir de R$ 300" },
+          { nome: "Cobertura (cover-up)", descricao: "Novo projeto pensado para cobrir ou renovar uma tatuagem antiga.", duracao: "Sob avaliação", preco: "a partir de R$ 700" },
+          { nome: "Flash day", descricao: "Desenhos prontos do artista com valor fechado, em datas especiais.", duracao: "1–2 h", preco: "R$ 250" }
+        ]
+      },
+
+      // BLOQUE 4 — Testimonios (recomendado: 3)
+      depoimentos: {
+        sobretitulo: "Clientes",
+        titulo: "Quem já saiu daqui tatuado",
+        itens: [
+          { texto: "Levei só uma ideia solta e saí com o desenho mais bonito que já vi. Cicatrizou perfeito.", nome: "Marina T.", origem: "Brasília, DF" },
+          { texto: "Estúdio impecável, tudo descartável e aberto na minha frente. Me senti seguro do começo ao fim.", nome: "Diego R.", origem: "Goiânia, GO" },
+          { texto: "Fechei o braço em quatro sessões. Atenção a cada detalhe e nenhuma pressa.", nome: "Paula S.", origem: "Alto Paraíso, GO" }
+        ]
+      },
+
+      // BLOQUE 5 — Ubicación
+      localizacao: {
+        sobretitulo: "Onde estamos",
+        titulo: "Alto Paraíso de Goiás",
+        endereco: "Rua das Nascentes, 45 — Centro, Alto Paraíso de Goiás - GO, 73770-000",
+        nota: "Atendimento somente com hora marcada, para maiores de 18 anos. Traga um documento com foto.",
+        rotuloHorarios: "Horários",
+        rotuloMapa: "Abrir no Google Maps",
+        horarios: [
+          "Terça a sábado: 11h às 20h",
+          "Domingo e segunda: fechado"
+        ]
+      },
+
+      // BLOQUE 6 — Footer / CTA
+      cta: {
+        titulo: "Reserve a sua sessão",
+        texto: "Mande a sua ideia, referências e o local do corpo pelo WhatsApp. Respondemos com orçamento e datas disponíveis.",
+        botao: "Agendar pelo WhatsApp"
+      }
+    };
+  </script>
+  <!-- ===================== FIN DE DATOS DEL CLIENTE ===================== -->
+
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ["'Barlow Condensed'", "'Arial Narrow'", "sans-serif"],   // "serif" = títulos (nombre heredado de la madre)
+            sans: ["Inter", "system-ui", "sans-serif"]
+          },
+          colors: {
+            marca: "rgb(var(--marca) / <alpha-value>)",
+            escuro: "rgb(var(--escuro) / <alpha-value>)",
+            claro: "rgb(var(--claro) / <alpha-value>)"
+          },
+          letterSpacing: { eyebrow: "0.32em" }
+        }
+      }
+    };
+    // Hex → canales "r g b" para que funcionen las opacidades de Tailwind (text-escuro/70, etc.)
+    for (const [nome, hex] of Object.entries(CLIENTE.cores)) {
+      const n = parseInt(hex.replace("#", ""), 16);
+      document.documentElement.style.setProperty("--" + nome, [n >> 16, (n >> 8) & 255, n & 255].join(" "));
+    }
+  </script>
+  <style>
+    /* Control de desbordamiento horizontal en móvil */
+    html, body { overflow-x: clip; }                         /* clip y no hidden: hidden rompe position:sticky */
+    .flex > *, .inline-flex > *, .grid > * { min-width: 0; } /* los hijos de flex/grid pueden encogerse con su texto */
+    img, iframe, video { max-width: 100%; height: auto; }    /* las clases h-* de Tailwind siguen mandando donde existen */
+    h1, h2, h3, [data-campo="localizacao.endereco"] { overflow-wrap: anywhere; }
+
+    /* Aparición suave al hacer scroll (sin librerías) */
+    .revelar { opacity: 0; transform: translateY(24px); transition: opacity 1.1s ease, transform 1.1s ease; }
+    .revelar.visivel { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .revelar { opacity: 1; transform: none; transition: none; } }
+
+    /* Halo de la esfera de WhatsApp: como animate-ping pero hasta 1.6x, para no sobresalir del viewport en móvil */
+    @keyframes halo { 75%, 100% { transform: scale(1.6); opacity: 0; } }
+    .halo { animation: halo 2.4s cubic-bezier(0, 0, 0.2, 1) infinite; }
+    @media (prefers-reduced-motion: reduce) { .halo { animation: none; } }
+
+    /* Menú móvil: oculto por defecto; .abierto lo muestra con fundido */
+    .menu-movil { opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s; }
+    .menu-movil.abierto { opacity: 1; visibility: visible; transition: opacity .35s ease, visibility 0s; } /* visible al instante para poder enfocar la X */
+    .menu-movil [data-menu-contenido] { transform: translateY(16px); transition: transform .45s ease; }
+    .menu-movil.abierto [data-menu-contenido] { transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .menu-movil, .menu-movil [data-menu-contenido] { transition: none; transform: none; }
+    }
+  </style>
+</head>
+
+<body class="w-full bg-claro font-sans font-light text-escuro antialiased selection:bg-marca selection:text-white">
+
+  <!-- Header fijo: al pasar de 60px de scroll se vuelve cristal translúcido (ver RENDER) -->
+  <!-- Móvil/tablet: barra a ancho completo con degradado escuro → transparente que se funde con el hero.
+       Desde xl (1280px; con nombres largos el menú no cabe antes): barra de escritorio. -->
+  <header data-header class="fixed inset-x-0 top-0 z-40 bg-gradient-to-b from-escuro/90 via-escuro/55 to-transparent transition-all duration-300 ease-out xl:bg-none">
+    <div class="px-6 pb-5 pt-4 lg:px-10 xl:mx-auto xl:max-w-7xl xl:py-0">
+    <div data-header-barra class="flex items-center justify-between gap-4 transition-all duration-300 ease-out xl:gap-8 xl:py-7">
+      <!-- Móvil: el nombre puede ocupar dos líneas para no empujar los botones fuera de la pantalla -->
+      <a href="#inicio" class="min-w-0 font-serif text-xl leading-tight tracking-wide text-white md:text-2xl xl:shrink-0 xl:whitespace-nowrap" data-campo="nome"></a>
+      <nav class="hidden items-center gap-10 whitespace-nowrap text-[13px] uppercase tracking-[0.2em] text-white/80 xl:flex">
+        <a href="#sobre" class="transition-colors duration-300 hover:text-white" data-campo="menu.sobre"></a>
+        <a href="#servicos" class="transition-colors duration-300 hover:text-white" data-campo="menu.servicos"></a>
+        <a href="#depoimentos" class="transition-colors duration-300 hover:text-white" data-campo="menu.depoimentos"></a>
+        <a href="#localizacao" class="transition-colors duration-300 hover:text-white" data-campo="menu.localizacao"></a>
+        <a href="#contato" class="transition-colors duration-300 hover:text-white" data-campo="menu.contato"></a>
+        <a data-whatsapp class="rounded-full border border-white/40 px-6 py-2.5 text-white shadow-lg shadow-black/15 ring-1 ring-white/25 transition-all duration-300 hover:-translate-y-0.5 hover:border-marca hover:bg-marca hover:shadow-xl" data-campo="menu.agendar"></a>
+      </nav>
+      <!-- Móvil: CTA compacto siempre visible + botón hamburguesa -->
+      <div class="flex shrink-0 items-center gap-2 xl:hidden">
+        <a data-whatsapp class="rounded-full border border-white/25 bg-white/15 px-4 py-2 text-xs uppercase tracking-widest text-white backdrop-blur-sm transition-all duration-300 hover:bg-marca" data-campo="menu.agendar"></a>
+        <button type="button" data-menu-abrir aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir menu"
+                class="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white backdrop-blur-sm transition-colors duration-300 hover:bg-marca">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    </div>
+  </header>
+
+  <!-- Menú móvil a pantalla completa. Se cierra con un enlace, tocando fuera del contenido o con Escape (ver RENDER). -->
+  <div id="menu-movil" data-menu-panel role="dialog" aria-modal="true" aria-label="Menu"
+       class="menu-movil fixed inset-0 z-[60] flex flex-col bg-escuro text-claro xl:hidden">
+    <div class="flex items-center justify-between px-6 pt-4">
+      <span class="font-serif text-xl tracking-wide text-white" data-campo="nome"></span>
+      <button type="button" data-menu-fechar aria-label="Fechar menu"
+              class="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-white transition-colors duration-300 hover:bg-marca">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="flex flex-1 items-center px-6 pb-[calc(40px+env(safe-area-inset-bottom))]">
+      <div data-menu-contenido>
+        <nav aria-label="Seções">
+          <ul class="space-y-5 font-serif text-4xl">
+            <li><a href="#sobre" class="transition-colors duration-300 hover:text-marca" data-campo="menu.sobre"></a></li>
+            <li><a href="#servicos" class="transition-colors duration-300 hover:text-marca" data-campo="menu.servicos"></a></li>
+            <li><a href="#depoimentos" class="transition-colors duration-300 hover:text-marca" data-campo="menu.depoimentos"></a></li>
+            <li><a href="#localizacao" class="transition-colors duration-300 hover:text-marca" data-campo="menu.localizacao"></a></li>
+            <li><a href="#contato" class="transition-colors duration-300 hover:text-marca" data-campo="menu.contato"></a></li>
+          </ul>
+        </nav>
+        <a data-whatsapp class="mt-12 inline-flex items-center gap-4 rounded-full bg-claro px-8 py-4 text-[13px] uppercase tracking-[0.2em] text-escuro shadow-lg shadow-black/15 ring-1 ring-white/25 transition-all duration-300 hover:bg-marca hover:text-white">
+          <span data-campo="cta.botao"></span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BLOQUE 1: HERO ===== -->
+  <section id="inicio" data-fondo="hero" class="relative flex min-h-[100svh] flex-col overflow-hidden bg-gradient-to-br from-marca to-escuro">
+    <img data-img="hero" alt="" width="2400" height="1600" fetchpriority="high"
+         class="absolute inset-0 h-full w-full object-cover">
+    <video data-video-hero autoplay loop muted playsinline preload="auto" aria-hidden="true"
+           class="absolute inset-0 hidden h-full w-full object-cover"></video>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/30"></div>
+
+    <!-- Móvil: slogan arriba y contenido abajo (justify-between); desde md todo se agrupa abajo -->
+    <div class="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between px-6 pb-16 pt-36 md:justify-end md:pb-20 md:pt-40 lg:px-10 lg:pb-28">
+      <p class="text-xs uppercase tracking-eyebrow text-white/75 md:mb-6" data-campo="slogan"></p>
+      <div>
+      <h1 class="max-w-4xl font-serif text-5xl font-normal leading-[1.02] text-white sm:text-7xl lg:text-8xl" data-campo="hero.titulo"></h1>
+      <div class="mt-10 flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
+        <p class="max-w-md text-lg leading-relaxed text-white/80" data-campo="hero.subtitulo"></p>
+        <a data-whatsapp class="group inline-flex items-center gap-4 self-start rounded-full bg-claro px-8 py-4 text-[13px] font-normal uppercase tracking-[0.2em] text-escuro shadow-lg shadow-black/15 ring-1 ring-white/25 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-marca hover:text-white hover:shadow-xl sm:self-auto">
+          <span data-campo="hero.botao"></span>
+          <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span>
+        </a>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOQUE 2: BENEFICIOS ===== -->
+  <section id="sobre" class="py-24 sm:py-32 lg:py-40">
+    <div class="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-12 lg:gap-0 lg:px-10">
+      <figure class="revelar lg:col-span-5">
+        <div data-fondo="ambiente" class="group isolate aspect-[3/4] overflow-hidden rounded-2xl bg-gradient-to-br from-marca/40 to-escuro/40">
+          <img data-img="ambiente" alt="" width="1200" height="1600" loading="lazy"
+               class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+        </div>
+      </figure>
+
+      <div class="lg:col-span-6 lg:col-start-7 lg:pt-24">
+        <div class="revelar">
+          <p class="text-xs uppercase tracking-eyebrow text-marca" data-campo="beneficios.sobretitulo"></p>
+          <h2 class="mt-6 font-serif text-4xl leading-[1.08] sm:text-5xl lg:text-6xl" data-campo="beneficios.titulo"></h2>
+          <p class="mt-8 max-w-lg text-lg leading-relaxed text-escuro/70" data-campo="beneficios.intro"></p>
+        </div>
+
+        <!-- .revelar va en el <li> y el hover en el hijo, para que sus transform no choquen -->
+        <ol class="mt-14" data-lista="beneficios">
+          <template>
+            <li class="revelar">
+              <div class="grid grid-cols-[3rem_1fr] gap-x-4 border-b border-escuro/15 py-7 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-marca">
+                <span class="pt-1 font-serif text-lg italic text-marca" data-item="#"></span>
+                <div>
+                  <h3 class="font-serif text-2xl" data-item="titulo"></h3>
+                  <p class="mt-2 leading-relaxed text-escuro/65" data-item="texto"></p>
+                </div>
+              </div>
+            </li>
+          </template>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOQUE 3: SERVICIOS ===== -->
+  <section id="servicos" class="bg-escuro py-24 text-claro sm:py-32 lg:py-40">
+    <div class="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-12 lg:px-10">
+      <div class="revelar lg:col-span-4">
+        <div class="lg:sticky lg:top-16">
+          <p class="text-xs uppercase tracking-eyebrow text-marca" data-campo="servicos.sobretitulo"></p>
+          <h2 class="mt-6 font-serif text-4xl leading-[1.08] sm:text-5xl" data-campo="servicos.titulo"></h2>
+          <p class="mt-6 leading-relaxed text-claro/65" data-campo="servicos.subtitulo"></p>
+          <!-- Visible en todas las medidas: 4:3 en móvil/tablet, 4:5 vertical desde lg -->
+          <div class="group isolate mt-12 aspect-[4/3] overflow-hidden rounded-2xl lg:aspect-[4/5]">
+            <img data-img="servicos" alt="" width="1200" height="1500" loading="lazy"
+                 class="h-full w-full object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-105">
+          </div>
+        </div>
+      </div>
+
+      <!-- Cada fila abre WhatsApp con el nombre del servicio (data-wa-servico) -->
+      <ol class="border-b border-claro/15 lg:col-span-7 lg:col-start-6" data-lista="servicos">
+        <template>
+          <li class="revelar">
+            <a data-wa-servico class="group grid grid-cols-[3rem_1fr] gap-x-4 border-t border-claro/15 py-9 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-marca sm:grid-cols-[4rem_1fr_auto] sm:gap-x-8">
+              <span class="pt-1 font-serif text-lg italic text-marca" data-item="#"></span>
+              <div>
+                <h3 class="font-serif text-2xl transition-colors duration-300 group-hover:text-white sm:text-3xl" data-item="nome"></h3>
+                <p class="mt-3 max-w-md leading-relaxed text-claro/60" data-item="descricao"></p>
+              </div>
+              <div class="col-start-2 mt-4 flex items-center gap-6 text-sm uppercase tracking-[0.15em] sm:col-start-3 sm:mt-1 sm:flex-col sm:items-end sm:gap-2">
+                <span class="text-claro/50" data-item="duracao"></span>
+                <span class="text-claro" data-item="preco"></span>
+                <span class="text-lg text-marca transition-transform duration-300 ease-out group-hover:translate-x-1.5 sm:mt-3" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+        </template>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== BLOQUE 4: TESTIMONIOS ===== -->
+  <section id="depoimentos" class="py-24 sm:py-32 lg:py-40">
+    <div class="mx-auto max-w-7xl px-6 lg:px-10">
+      <div class="revelar text-center">
+        <p class="text-xs uppercase tracking-eyebrow text-marca" data-campo="depoimentos.sobretitulo"></p>
+        <h2 class="mt-6 font-serif text-4xl sm:text-5xl" data-campo="depoimentos.titulo"></h2>
+      </div>
+      <div class="mt-20 grid gap-16 md:grid-cols-3 md:gap-12" data-lista="depoimentos">
+        <template>
+          <figure class="revelar flex flex-col border-t border-escuro/15 pt-10">
+            <span class="font-serif text-6xl leading-none text-marca" aria-hidden="true">“</span>
+            <blockquote class="mt-2 flex-1 font-serif text-2xl italic leading-snug" data-item="texto"></blockquote>
+            <figcaption class="mt-8 text-xs uppercase tracking-[0.2em]">
+              <span data-item="nome"></span>
+              <span class="mt-1 block text-escuro/50" data-item="origem"></span>
+            </figcaption>
+          </figure>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOQUE 5: UBICACIÓN ===== -->
+  <section id="localizacao" class="border-t border-escuro/10 py-24 sm:py-32">
+    <div class="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-12 lg:items-center lg:px-10">
+      <div class="revelar lg:col-span-4">
+        <p class="text-xs uppercase tracking-eyebrow text-marca" data-campo="localizacao.sobretitulo"></p>
+        <h2 class="mt-6 font-serif text-4xl sm:text-5xl" data-campo="localizacao.titulo"></h2>
+        <p class="mt-8 text-lg leading-relaxed" data-campo="localizacao.endereco"></p>
+        <p class="mt-4 leading-relaxed text-escuro/60" data-campo="localizacao.nota"></p>
+        <h3 class="mt-10 text-xs uppercase tracking-eyebrow text-marca" data-campo="localizacao.rotuloHorarios"></h3>
+        <ul class="mt-4 space-y-2 text-escuro/80" data-lista="localizacao.horarios">
+          <template><li data-item></li></template>
+        </ul>
+        <a data-mapa-link target="_blank" rel="noopener noreferrer"
+           class="mt-10 inline-block border-b border-escuro/40 pb-1 text-[13px] uppercase tracking-[0.2em] transition hover:border-escuro">
+          <span data-campo="localizacao.rotuloMapa"></span> →
+        </a>
+      </div>
+      <div class="revelar isolate overflow-hidden rounded-2xl lg:col-span-7 lg:col-start-6">
+        <iframe data-mapa title="Mapa de localização" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                class="block h-80 w-full max-w-full border-0 grayscale-[0.6] sepia-[0.15] sm:h-[480px]"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOQUE 6: FOOTER / CTA WHATSAPP ===== -->
+  <footer id="contato" data-fondo="cta" class="relative overflow-hidden bg-escuro text-claro">
+    <img data-img="cta" alt="" width="2400" height="1600" loading="lazy"
+         class="absolute inset-0 h-full w-full object-cover">
+    <div class="absolute inset-0 bg-escuro/75"></div>
+
+    <div class="relative mx-auto max-w-3xl px-6 py-32 text-center sm:py-44">
+      <h2 class="revelar font-serif text-5xl leading-[1.05] sm:text-7xl" data-campo="cta.titulo"></h2>
+      <p class="revelar mx-auto mt-8 max-w-lg text-lg leading-relaxed text-claro/75" data-campo="cta.texto"></p>
+      <!-- .revelar en el contenedor para no chocar con la micro-elevación del botón -->
+      <div class="revelar mt-12">
+        <a data-whatsapp class="group inline-flex items-center gap-4 rounded-full bg-claro px-10 py-5 text-[13px] uppercase tracking-[0.2em] text-escuro shadow-lg shadow-black/15 ring-1 ring-white/25 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-marca hover:text-white hover:shadow-xl">
+          <span data-campo="cta.botao"></span>
+          <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="relative border-t border-claro/15">
+      <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-6 py-[38px] text-[0.76rem] uppercase tracking-[0.12em] text-claro/[0.78] sm:flex-row lg:px-10">
+        <p>© <span data-ano></span> <span data-campo="nome"></span></p>
+        <div class="flex items-center gap-4">
+          <span class="mr-2" data-campo="telefone"></span>
+          <a data-rede="instagram" aria-label="Instagram" target="_blank" rel="noopener noreferrer"
+             class="rounded-full bg-claro p-3 text-escuro shadow-md ring-2 ring-marca/40 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-marca hover:text-white hover:shadow-lg hover:shadow-marca/40">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/>
+            </svg>
+          </a>
+          <a data-rede="facebook" aria-label="Facebook" target="_blank" rel="noopener noreferrer"
+             class="rounded-full bg-claro p-3 text-escuro shadow-md ring-2 ring-marca/40 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-marca hover:text-white hover:shadow-lg hover:shadow-marca/40">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V10H6.5v3.5H9V21h3.5v-7.5H15l.5-3.5h-3V7a1 1 0 0 1 1-1H15z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp (enlace directo, NO es un chatbot).
+       Los halos van como hermanos detrás del botón para que el pulso no tiña el propio botón. -->
+  <div data-wa-flotante class="pointer-events-none fixed bottom-[calc(40px+env(safe-area-inset-bottom))] right-5 z-50 translate-y-4 opacity-0 transition-all duration-500 motion-reduce:transition-none sm:right-8 md:bottom-28">
+    <span class="pointer-events-none halo absolute inset-0 rounded-full bg-marca/50" aria-hidden="true"></span>
+    <span class="pointer-events-none halo absolute inset-0 rounded-full bg-marca/50 [animation-delay:1.2s]" aria-hidden="true"></span>
+    <a data-whatsapp aria-label="Conversar no WhatsApp"
+       class="group relative flex h-14 w-14 items-center justify-center rounded-full bg-escuro text-claro shadow-[0_0_28px_rgb(var(--marca)/0.55)] ring-4 ring-marca/35 transition-all duration-300 ease-out hover:scale-110 hover:bg-marca hover:ring-marca/60 sm:h-16 sm:w-16">
+      <svg viewBox="0 0 24 24" class="h-6 w-6 sm:h-7 sm:w-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- =====================================================================
+       RENDER — no editar. Vuelca los datos de CLIENTE en los bloques.
+       ===================================================================== -->
+  <script>
+    (function () {
+      const C = CLIENTE;
+      const get = (ruta) => ruta.split(".").reduce((o, k) => (o == null ? o : o[k]), C);
+      const wa = (texto) => "https://wa.me/" + String(C.whatsapp).replace(/\D/g, "") + "?text=" + encodeURIComponent(texto);
+      const waUrl = wa(C.mensagemWhatsapp);
+
+      // Seguridad: solo se aceptan URLs https:// o rutas relativas limpias (sin esquema, sin "//", sin "..")
+      const urlSegura = (u) =>
+        typeof u === "string" &&
+        (/^https:\/\/[^\s"'<>\\]+$/.test(u) || /^(?!.*\.\.)(\.\/)?[\w-][\w.-]*(\/[\w.-]+)*$/.test(u)) ? u : "";
+      // Redes: acepta usuario (con o sin @) o URL https:// completa
+      const urlRede = (valor, base) => {
+        if (!valor) return "";
+        if (/^https:\/\//.test(valor)) return urlSegura(valor);
+        const usuario = valor.replace(/^@/, "");
+        return /^[\w.-]+$/.test(usuario) ? base + usuario : "";
+      };
+      const enlaceExterno = (a, href) => {
+        a.href = href;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      };
+
+      // SEO
+      document.title = C.seo.titulo;
+      document.querySelector('meta[name="description"]').content = C.seo.descricao;
+      const imagemOg = urlSegura((C.imagens.respaldo && C.imagens.respaldo.hero) || C.imagens.hero);
+      document.querySelector('meta[property="og:title"]').content = C.seo.titulo;
+      document.querySelector('meta[property="og:description"]').content = C.seo.descricao;
+      if (imagemOg) document.querySelector('meta[property="og:image"]').content = imagemOg;
+
+      // Textos simples (se eliminan si el campo está vacío)
+      document.querySelectorAll("[data-campo]").forEach((el) => {
+        const valor = get(el.dataset.campo);
+        if (valor) el.textContent = valor; else el.remove();
+      });
+
+      // Listas (beneficios, servicios, testimonios, horarios)
+      // data-item="campo" → valor del campo · data-item="#" → número 01, 02… · data-item vacío → el propio elemento
+      document.querySelectorAll("[data-lista]").forEach((cont) => {
+        const dados = get(cont.dataset.lista);
+        const itens = Array.isArray(dados) ? dados : dados.itens;
+        const tpl = cont.querySelector("template");
+        itens.forEach((item, i) => {
+          const nodo = tpl.content.cloneNode(true);
+          nodo.querySelectorAll("[data-item]").forEach((el) => {
+            const campo = el.dataset.item;
+            const valor = campo === "#" ? String(i + 1).padStart(2, "0") : campo ? item[campo] : item;
+            if (valor) el.textContent = valor; else el.remove();
+          });
+          // Aparición en cascada: +100ms por ítem
+          const rev = nodo.querySelector(".revelar");
+          if (rev) rev.style.transitionDelay = i * 100 + "ms";
+          const link = nodo.querySelector("[data-wa-servico]");
+          if (link) enlaceExterno(link, wa(C.mensagemServico + " " + item.nome));
+          cont.appendChild(nodo);
+        });
+      });
+
+      // Fondos de respaldo (Unsplash) debajo de la foto local
+      document.querySelectorAll("[data-fondo]").forEach((el) => {
+        const src = urlSegura((C.imagens.respaldo || {})[el.dataset.fondo]);
+        if (!src) return;
+        el.style.backgroundImage = 'url("' + src + '")';
+        el.style.backgroundSize = "cover";
+        el.style.backgroundPosition = "center";
+      });
+
+      // Imágenes: si la foto local no existe, se carga la de respaldo en la propia <img>
+      // (así el zoom del hover y el lazy loading funcionan igual); si tampoco hay respaldo, se elimina
+      document.querySelectorAll("[data-img]").forEach((img) => {
+        const src = urlSegura(C.imagens[img.dataset.img]);
+        const respaldo = urlSegura((C.imagens.respaldo || {})[img.dataset.img]);
+        img.addEventListener("error", () => {
+          if (respaldo && !img.dataset.respaldo) { img.dataset.respaldo = "1"; img.src = respaldo; } else { img.remove(); }
+        });
+        if (src || respaldo) { img.src = src || respaldo; img.alt = C.nome; } else { img.remove(); }
+      });
+
+      // Video del Hero (la imagen "hero" queda debajo como fallback y como poster)
+      const video = document.querySelector("[data-video-hero]");
+      const videoSrc = urlSegura(C.imagens.videoHero);
+      const heroSrc = urlSegura(C.imagens.hero);
+      const pocoMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const ahorroDatos = navigator.connection && navigator.connection.saveData;
+      if (videoSrc && !pocoMovimiento && !ahorroDatos) {
+        if (heroSrc) video.poster = heroSrc;
+        video.addEventListener("error", () => video.remove(), true);
+        video.src = videoSrc;
+        video.classList.remove("hidden");
+      } else {
+        video.remove();
+      }
+
+      // Header: cristal translúcido al pasar de 60px
+      const header = document.querySelector("[data-header]");
+      const barra = document.querySelector("[data-header-barra]");
+      const actualizarHeader = () => {
+        const activo = scrollY > 60;
+        // Fondo de cristal en todas las medidas, para que el menú móvil se lea sobre secciones claras
+        header.classList.toggle("backdrop-blur-md", activo);
+        header.classList.toggle("bg-escuro/85", activo);
+        header.classList.toggle("shadow-sm", activo);
+        barra.classList.toggle("xl:py-4", activo);
+        barra.classList.toggle("xl:py-7", !activo);
+      };
+      addEventListener("scroll", actualizarHeader, { passive: true });
+      actualizarHeader();
+
+      // Esfera de WhatsApp: aparece al salir del Hero
+      const esfera = document.querySelector("[data-wa-flotante]");
+      new IntersectionObserver(([e]) => {
+        ["opacity-0", "translate-y-4", "pointer-events-none"].forEach((c) => esfera.classList.toggle(c, e.isIntersecting));
+      }).observe(document.querySelector("#inicio"));
+
+      // Menú móvil
+      const panel = document.querySelector("[data-menu-panel]");
+      const botaoAbrir = document.querySelector("[data-menu-abrir]");
+      const botaoFechar = panel.querySelector("[data-menu-fechar]");
+      const alternarMenu = (aberto) => {
+        panel.classList.toggle("abierto", aberto);
+        botaoAbrir.setAttribute("aria-expanded", String(aberto));
+        document.body.style.overflow = aberto ? "hidden" : "";
+        (aberto ? botaoFechar : botaoAbrir).focus({ preventScroll: true });
+      };
+      botaoAbrir.addEventListener("click", () => alternarMenu(true));
+      // Cierra al tocar un enlace o fuera del contenido (incluye el botón X, que está fuera)
+      panel.addEventListener("click", (e) => {
+        if (e.target.closest("a") || !e.target.closest("[data-menu-contenido]")) alternarMenu(false);
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && panel.classList.contains("abierto")) alternarMenu(false);
+      });
+      // Si la ventana pasa a escritorio con el menú abierto, se cierra y libera el scroll
+      matchMedia("(min-width: 1280px)").addEventListener("change", (e) => {
+        if (e.matches && panel.classList.contains("abierto")) alternarMenu(false);
+      });
+
+      // WhatsApp
+      document.querySelectorAll("[data-whatsapp]").forEach((a) => enlaceExterno(a, waUrl));
+
+      // Mapa (embed sin API key)
+      const q = encodeURIComponent(C.localizacao.endereco);
+      document.querySelector("[data-mapa]").src = "https://www.google.com/maps?q=" + q + "&output=embed";
+      document.querySelector("[data-mapa-link]").href = "https://www.google.com/maps/search/?api=1&query=" + q;
+
+      // Redes sociales (se ocultan si están vacías o no son válidas)
+      const bases = { instagram: "https://instagram.com/", facebook: "https://facebook.com/" };
+      document.querySelectorAll("[data-rede]").forEach((a) => {
+        const rede = a.dataset.rede;
+        const href = urlRede(C[rede], bases[rede]);
+        if (href) enlaceExterno(a, href); else a.remove();
+      });
+
+      document.querySelector("[data-ano]").textContent = new Date().getFullYear();
+
+      // Aparición al hacer scroll
+      const obs = new IntersectionObserver((entradas) => {
+        entradas.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add("visivel"); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".revelar").forEach((el) => obs.observe(el));
+
+      // SEO local: datos estructurados
+      const ld = document.createElement("script");
+      ld.type = "application/ld+json";
+      ld.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": C.seo.schema || "LocalBusiness",
+        name: C.nome,
+        description: C.seo.descricao,
+        telephone: C.telefone,
+        image: heroSrc || undefined,
+        address: C.localizacao.endereco,
+        url: location.href
+      });
+      document.head.appendChild(ld);
+    })();
+  </script>
+</body>
+</html>

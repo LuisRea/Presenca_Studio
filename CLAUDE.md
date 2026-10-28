@@ -8,6 +8,7 @@ Estudio de landing pages para negocios locales (Brasil). Cada sitio se entrega a
 templates/
   bienestar/index.html   ← plantilla madre (referencia para los demás nichos)
   turismo/  salud/  tiendas/  servicios/   ← variantes: misma arquitectura, solo cambia CLIENTE
+  tatuaje/  salao-barbearia/            ← variantes con tipografía propia (link de Google Fonts + tailwind.config); markup y RENDER idénticos
   _headers               ← cabeceras de seguridad (se copian a cada cliente)
 clientes/
   <slug-cliente>/index.html   ← copia de una plantilla, ya personalizada
@@ -47,7 +48,7 @@ scripts/                 ← utilidades (copiar plantilla, validar, publicar)
 
 ## Flujo para un nuevo cliente
 
-1. Clonar la plantilla: `.\scripts\nuevo-cliente.ps1 -Nicho <bienestar|turismo|salud|tiendas|servicios> -Slug nombre-cliente [-Abrir] [-Force]`.
+1. Clonar la plantilla: `.\scripts\nuevo-cliente.ps1 -Nicho <bienestar|turismo|salud|tiendas|servicios|tatuaje|salao-barbearia> -Slug nombre-cliente [-Abrir] [-Force]`.
 2. Editar solo el objeto `CLIENTE`. Las URLs de Unsplash de las plantillas son de muestra: en la entrega se sustituyen por fotos reales del cliente.
 3. Copiar `CLIENTE.seo.titulo`, `CLIENTE.seo.descricao` y la imagen del Hero a las metas estáticas del `<head>` (`<title>`, `description`, `og:*`).
 4. Revisar en móvil (375px) y escritorio; verificar que el botón de WhatsApp abre el número correcto y que la vista previa del enlace en WhatsApp muestra título e imagen.

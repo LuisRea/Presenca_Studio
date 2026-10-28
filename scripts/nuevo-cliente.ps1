@@ -8,7 +8,7 @@
 #>
 param(
   [Parameter(Mandatory = $true, Position = 0)]
-  [ValidateSet("bienestar", "turismo", "salud", "tiendas", "servicios")]
+  [ValidateSet("bienestar", "turismo", "salud", "tiendas", "servicios", "tatuaje", "salao-barbearia")]
   [string]$Nicho,
 
   [Parameter(Mandatory = $true, Position = 1)]
